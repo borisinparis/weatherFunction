@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import "./output.css"
 import { getAllCity } from './utils/get-all-cities.js'
-import {WeatherInfo} from "./component/Weatherdata.jsx"
+import { WeatherInfo} from "./component/Weatherdata.jsx"
 function App() {
   const [searchValue, setSearchValue] = useState("")
   const [filteredData, setFilteredData] = useState([])
