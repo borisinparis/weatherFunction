@@ -41,7 +41,7 @@ export const WeatherInfo = ({weatherData}) => {
 
         return ( <>
             <div className="flex m-auto relative w-[1200px] h-[1200px]">
-                <div className="w-[400px] h-[800px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
+                <div className="w-[400px] border p-4 h-[800px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
                   <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
                   <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
                   <h1 className="text-transparent bg-clip-text font-extrabold text-[140px] -mt-1 bg-gradient-to-b from-black to-white ml-[40px]">
@@ -52,13 +52,13 @@ export const WeatherInfo = ({weatherData}) => {
                   
                 </div>
 
-                <div className="w-[400px] h-[800px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
+                <div className="w-[400px] h-[800px] border shadow-2x max-w-[400px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
                   <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
                   <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
                   <h1 className="text-transparent bg-clip-text font-extrabold text-[140px] -mt-1 bg-gradient-to-b from-black to-white ml-[40px]">
                     {weatherData.forecast.forecastday[0].hour[18].temp_c}˚
                   </h1>
-                  <p className="text-yellow-500 ml-[40px]">{weatherData.current.condition.text}</p>
+                  <p className="text-yellow-500 ml-[40px]">{weatherData.forecast.forecastday[0].hour[18].condition.text}</p>
                   <img className="w-[100px] h-[100px]" src={`${nightIcon}.png`} alt="weather icon"/>
                   
                 </div>

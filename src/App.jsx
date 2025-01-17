@@ -3,29 +3,14 @@ import './App.css'
 import "./output.css"
 import { getAllCity } from './utils/get-all-cities.js'
 import { WeatherInfo} from "./component/Weatherdata.jsx"
+import Skeleton from 'react-loading-skeleton'
 function App() {
   const [searchValue, setSearchValue] = useState("")
   const [filteredData, setFilteredData] = useState([])
   const [allCity, setAllCity] = useState([])
   const [selectedCity, setSelectedCity] = useState("Ulaanbaatar, Mongolia")
   const [weatherData, setWeatherData] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
-  // const [isImage,setIsImage]= useState("")
-
-  const weatherInfo = [
-    { "code": 1000, "day": "Sunny", "night": "Clear", "icon": "./sun" },
-    { "code": 1003, "day": "Partly cloudy", "night": "Partly cloudy", "icon": "./Clouds" },
-    { "code": 1006, "day": "Cloudy", "night": "Cloudy", "icon": "./Clouds" },
-    { "code": 1009, "day": "Overcast", "night": "Overcast", "icon": "./Wind" },
-    { "code": 1030, "day": "Mist", "night": "Mist", "icon": "./Wind" },
-    { "code": 1063, "day": "Patchy rain possible", "night": "Patchy rain possible", "icon": "./Day Rain" },
-    { "code": 1066, "day": "Patchy snow possible", "night": "Patchy snow possible", "icon": 179 },
-    { "code": 1069, "day": "Patchy sleet possible", "night": "Patchy sleet possible", "icon": 182 },
-    { "code": 1072, "day": "Patchy freezing drizzle possible", "night": "Patchy freezing drizzle possible", "icon": 185 },
-    { "code": 1087, "day": "Thundery outbreaks possible", "night": "Thundery outbreaks possible", "icon": 200 },
-    { "code": 1114, "day": "Blowing snow", "night": "Blowing snow", "icon": 227 },
-    { "code": 1117, "day": "Blizzard", "night": "Blizzard", "icon": 230 },
-  ];
+  const [isLoading, setIsLoading] = useState(true)
 
   const weatherApiKey = "83e4cc7cbde84beea0091244251501"
 
@@ -59,8 +44,6 @@ function App() {
       setWeatherData(result)
       console.log(result);
       
-      
-
     } catch (error) {
       console.log(error);
 
@@ -69,7 +52,6 @@ function App() {
       setIsLoading(false)
     }
   }
-
 
   const clickedTarget = (city) => {
     setSelectedCity(city)
@@ -90,10 +72,15 @@ function App() {
     getCountries();
   }, [])
 
-  if(isLoading){
-    return <p>isLoading..</p>
-  }
+  useEffect(() =>{
+    setTimeout(()=>{
+      setIsLoading(false)
+    }, 1000)
+  },[])
 
+  // if(isLoading){
+  //   return <p><Skeleton /></p>
+  // }
 
   return (
     <>
@@ -114,8 +101,8 @@ function App() {
         </div>
 
       ))}
-  <WeatherInfo weatherData={weatherData} />
-      
+{isLoading ? <Skeleton/> : <WeatherInfo weatherData={weatherData} /> }
+  {/* <WeatherInfo weatherData={weatherData} /> */}
 
     </>
   )
