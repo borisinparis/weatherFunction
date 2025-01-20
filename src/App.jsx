@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import "./output.css"
 import { getAllCity } from './utils/get-all-cities.js'
-import { WeatherInfo} from "./component/Weatherdata.jsx"
+import { WeatherInfo } from "./component/Weatherdata.jsx"
 import Skeleton from 'react-loading-skeleton'
+
 function App() {
   const [searchValue, setSearchValue] = useState("")
   const [filteredData, setFilteredData] = useState([])
@@ -77,10 +78,6 @@ function App() {
       setIsLoading(false)
     }, 1000)
   },[])
-
-  // if(isLoading){
-  //   return <p><Skeleton /></p>
-  // }
 
   return (
     <>
