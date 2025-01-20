@@ -84,13 +84,13 @@ function App() {
         value={searchValue}
         onChange={onChange}
         placeholder="Search"
-        className="m-auto absolute z-10 left-[10%] w-[350px] h-[58px] outline-none rounded-[20px] text-3xl border-none"
+        className="m-auto absolute z-10 left-[42%] w-[350px] h-[58px] outline-none rounded-[20px] text-3xl border-none"
         type="search"
       />
       {filteredData?.map((el) => (
         <div
           onClick={() => clickedTarget(el)}
-          className="text-black relative z-20 left-[10%] w-[400px] h-[80px] bg-white/95"
+          className="text-black left-[10%] w-[400px] h-[80px] bg-white/95"
           key={el}
         >
           {el}

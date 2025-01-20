@@ -6,48 +6,61 @@ import Location from '../icons/Location.jsx';
 
 export const WeatherInfo = ({ weatherData }) => {
   const weatherInfo = [
-    { "code": 1000, "day": "Sunny", "night": "Clear", "icon": "./sun" },
-    { "code": 1003, "day": "Partly cloudy", "night": "Partly cloudy", "icon": "./Clouds" },
-    { "code": 1006, "day": "Cloudy", "night": "Cloudy", "icon": "./Clouds" },
-    { "code": 1009, "day": "Overcast", "night": "Overcast", "icon": "./Wind" },
-    { "code": 1030, "day": "Mist", "night": "Mist", "icon": "./Wind" },
-    { "code": 1063, "day": "Patchy rain possible", "night": "Patchy rain possible", "icon": "./Day Rain" },
-    { "code": 1066, "day": "Patchy snow possible", "night": "Patchy snow possible", "icon": "./Day Snow" },
-    { "code": 1069, "day": "Patchy sleet possible", "night": "Patchy sleet possible", "icon": "./Day Snow" },
-    { "code": 1072, "day": "Patchy freezing drizzle possible", "night": "Patchy freezing drizzle possible", "icon": "./Clouds" },
-    { "code": 1087, "day": "Thundery outbreaks possible", "night": "Thundery outbreaks possible", "icon": "./Day Storm" },
-    { "code": 1114, "day": "Blowing snow", "night": "Blowing snow", "icon": "./Day Snow" },
-    { "code": 1117, "day": "Blizzard", "night": "Blizzard", "icon": "./Day Storm" },
-    { "code": 1210, "day": "Blizzard", "night": "Blizzard", "icon": "./Day Snow" },
+    {"text" :"sun", "icon":"./sun" },
+    {"text" :"cloudy", "icon":"./Clouds" },
+    {"text" :"wind", "icon":"./Wind" },
+    {"text" :"rain", "icon":"./Day Rain" },
+    {"text" :"snow", "icon":"./Day Snow" },
+    {"text" :"Storm", "icon":"./Day Storm" },
+    {"text" :"clear", "icon":"./sun" },
+    {"text" :"mist", "icon": "./Clouds"},
+    {"text" :"overcast", "icon": "./Clouds"}
   ];
   const nightInfo = [
-    { "code": 1000, "day": "Sunny", "night": "Clear", "icon": "./Night Moon" },
-    { "code": 1003, "day": "Partly cloudy", "night": "Partly cloudy", "icon": "./Night Clouds" },
-    { "code": 1006, "day": "Cloudy", "night": "Cloudy", "icon": "./Night Clouds" },
-    { "code": 1009, "day": "Overcast", "night": "Overcast", "icon": "./Night Clouds" },
-    { "code": 1030, "day": "Mist", "night": "Mist", "icon": "./Night Clouds" },
-    { "code": 1063, "day": "Patchy rain possible", "night": "Patchy rain possible", "icon": "./Night Rain" },
-    { "code": 1066, "day": "Patchy snow possible", "night": "Patchy snow possible", "icon": "./Night Snow" },
-    { "code": 1069, "day": "Patchy sleet possible", "night": "Patchy sleet possible", "icon": "./Night Snow" },
-    { "code": 1072, "day": "Patchy freezing drizzle possible", "night": "Patchy freezing drizzle possible", "icon": "./Night Snow" },
-    { "code": 1087, "day": "Thundery outbreaks possible", "night": "Thundery outbreaks possible", "icon": "./Night Storm" },
-    { "code": 1114, "day": "Blowing snow", "night": "Blowing snow", "icon": "./Day Snow" },
-    { "code": 1117, "day": "Blizzard", "night": "Blizzard", "icon": "./Day Storm" },
+    {"text" :"moon", "icon":"./Night Moon" },
+    {"text" :"cloudy", "icon":"./Night Clouds" },
+    {"text" :"wind", "icon":"./Night Wind" },
+    {"text" :"rain", "icon":"./Night Rain" },
+    {"text" :"snow", "icon":"./Night Snow" },
+    {"text" :"storm", "icon":"./Night Storm" },
+    {"text" :"clear", "icon":"./Night Moon" },
+    {"text" :"mist", "icon": "./Night Clouds"},
+    {"text" :"overcast", "icon": "./Night Clouds"}
   ];
 
+  const weatherTextChange= weatherData?.forecast?.forecastday[0]?.hour[10]?.condition?.text
+ const lower = weatherTextChange.toLowerCase()
+ console.log(lower);
+ const nightText= weatherData?.forecast?.forecastday[0]?.hour[22]?.condition?.text
+ const lowerNight = nightText.toLowerCase()
+ console.log(lowerNight);
+ 
+const weatherIcon = weatherInfo.find((el)=>(
+  lower.includes(el.text)
+))?.icon || "default icon"
 
+console.log(weatherIcon);
 
-  const weatherIcon = weatherInfo.find((el) => el.code === weatherData?.current?.condition?.code)?.icon;
+const nightIcon = nightInfo.find((el)=>(
+lowerNight.includes(el.text)
+))?.icon || "default icon"
 
-  const nightIcon = nightInfo.find((el) => el.code === weatherData?.forecast?.forecastday[0]?.hour[18]?.condition?.code)?.icon;
+console.log(nightIcon);
+// const weatherIcon = getWeatherIcons(weatherData)
+// console.log(weatherIcon);
+ 
+
+  // const weatherIcon = weatherInfo.find((el) => el.code === weatherData?.current?.condition?.code)?.icon;
+
+  // const nightIcon = nightInfo.find((el) => el.code === weatherData?.forecast?.forecastday[0]?.hour[18]?.condition?.code)?.icon;
 
   if (!weatherData.location) {
     return <p>weather data is unavaible for a selected</p>
   } else {
 
     return (<>
-      <div className="flex relative -z-1 m-auto w-[100vw] h-[100vh]">
-        <div className="w-1/2 m-auto h-full">
+      <div className="flex absolute z-1 m-auto w-[100vw] h-[100vh]">
+        <div className="w-1/2 mt-[100px] m-auto h-full">
         <div className="w-[400px] h-[880px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
           <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
           <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
@@ -73,8 +86,8 @@ export const WeatherInfo = ({ weatherData }) => {
 
         </div>
         </div>
-      <div className="w-1/2 h-full m-auto bg-black/95">
-        <div className="w-[400px] h-[880px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
+      <div className="w-1/2 h-full mt-[100px] m-auto bg-black/95">
+        <div className="w-[400px] mt-[100px] h-[880px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
           <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
           <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
           <img className="w-[430px] m-auto" src={`${nightIcon}.png`} alt="weather icon" />
