@@ -1,9 +1,10 @@
 import moment from "moment";
-import Heart from './icons/Heart.jsx'
-import User from './icons/User.jsx'
-import Home from './icons/Home.jsx'
-import Location from './icons/Location.jsx'
-export const WeatherInfo = ({weatherData}) => {
+import Heart from '../icons/Heart.jsx';
+import Search from "../icons/Search.jsx";
+import Home from '../icons/Home.jsx';
+import Location from '../icons/Location.jsx';
+
+export const WeatherInfo = ({ weatherData }) => {
   const weatherInfo = [
     { "code": 1000, "day": "Sunny", "night": "Clear", "icon": "./sun" },
     { "code": 1003, "day": "Partly cloudy", "night": "Partly cloudy", "icon": "./Clouds" },
@@ -35,26 +36,27 @@ export const WeatherInfo = ({weatherData}) => {
   ];
 
 
-    
-    const weatherIcon = weatherInfo.find((el) => el.code === weatherData?.current?.condition?.code)?.icon;
 
-    const nightIcon = nightInfo.find((el) => el.code === weatherData?.forecast?.forecastday[0]?.hour[18]?.condition?.code)?.icon;
-    
-    if (!weatherData.location) {
-        return <p>weather data is unavaible for a selected</p>
-    } else {
+  const weatherIcon = weatherInfo.find((el) => el.code === weatherData?.current?.condition?.code)?.icon;
 
-        return ( <>
-            <div className="flex m-auto relative w-[100vw] h-[100vh]">
-                <div className="absolute left-[30%] top-[8%] z-10 w-[400px] h-[800px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
-                  <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
-                  <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
-                  <img className="w-[430px] m-auto " src={`${weatherIcon}.png`} alt="weather icon"/>
-                  <h1 className="text-transparent bg-clip-text font-extrabold text-[140px] -mt-1 bg-gradient-to-b from-black to-white ml-[40px]">
-                    {weatherData.current.temp_c}˚
-                  </h1>
-                  <p className="text-yellow-500 ml-[40px]">{weatherData.current.condition.text}</p>
-                  <div className="flex justify-around mt-12">
+  const nightIcon = nightInfo.find((el) => el.code === weatherData?.forecast?.forecastday[0]?.hour[18]?.condition?.code)?.icon;
+
+  if (!weatherData.location) {
+    return <p>weather data is unavaible for a selected</p>
+  } else {
+
+    return (<>
+      <div className="flex relative -z-1 m-auto w-[100vw] h-[100vh]">
+        <div className="w-1/2 m-auto h-full">
+        <div className="w-[400px] h-[880px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
+          <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
+          <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
+          <img className="w-[430px] m-auto " src={`${weatherIcon}.png`} alt="weather icon" />
+          <h1 className="text-transparent bg-clip-text font-extrabold text-[140px] -mt-1 bg-gradient-to-b from-black to-white ml-[40px]">
+            {weatherData.current.temp_c}˚
+          </h1>
+          <p className="text-yellow-500 ml-[40px]">{weatherData.current.condition.text}</p>
+          <div className="flex m-auto justify-between mt-12">
             <div>
               <Home />
             </div>
@@ -62,24 +64,25 @@ export const WeatherInfo = ({weatherData}) => {
               <Heart />
             </div>
             <div>
-              <User />
+              <Search />
             </div>
             <div>
               <Location />
             </div>
           </div>
-                  
-                </div>
 
-                <div className="absolute left-[80%] top-[8%] z-10 w-[400px] h-[800px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
-                  <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
-                  <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
-                  <img className="w-[120px] m-auto"src={`${nightIcon}.png`} alt="weather icon"/>
-                  <h1 className="text-transparent bg-clip-text font-extrabold text-[140px] -mt-1 bg-gradient-to-b from-black to-white ml-[40px]">
-                    {weatherData.forecast.forecastday[0].hour[18].temp_c}˚
-                  </h1>
-                  <p className="text-yellow-500 ml-[40px]">{weatherData.forecast.forecastday[0].hour[18].condition.text}</p>
-                  <div className="flex justify-around mt-12">
+        </div>
+        </div>
+      <div className="w-1/2 h-full m-auto bg-black/95">
+        <div className="w-[400px] h-[880px] mt-[10px] m-auto rounded-[40px] bg-white/40 backdrop-blur-[10px]">
+          <p className="text-gray-400 text-[18px] ml-[40px]">{moment().format('MMMM Do YYYY')}</p>
+          <h2 className="text-[60px] ml-[40px]">{weatherData.location.name}</h2>
+          <img className="w-[430px] m-auto" src={`${nightIcon}.png`} alt="weather icon" />
+          <h1 className="text-transparent bg-clip-text font-extrabold text-[140px] -mt-1 bg-gradient-to-b from-black to-white ml-[40px]">
+            {weatherData.forecast.forecastday[0].hour[18].temp_c}˚
+          </h1>
+          <p className="text-yellow-500 ml-[40px]">{weatherData.forecast.forecastday[0].hour[18].condition.text}</p>
+          <div className="flex justify-around mt-12">
             <div>
               <Home />
             </div>
@@ -87,19 +90,20 @@ export const WeatherInfo = ({weatherData}) => {
               <Heart />
             </div>
             <div>
-              <User />
+              <Search />
             </div>
             <div>
-              <Pin />
+              <Location />
             </div>
           </div>
-                  
-                </div>
-                </div>
 
-                
-              </>
-        )
-    }
+        </div>
+        </div>
+      </div>
+
+
+    </>
+    )
+  }
 
 } 

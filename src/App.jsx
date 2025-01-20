@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import "./output.css"
 import { getAllCity } from './utils/get-all-cities.js'
-import { WeatherInfo } from "./component/Weatherdata.jsx"
+import { WeatherInfo } from "./components/Weatherdata.jsx"
 import Skeleton from 'react-loading-skeleton'
 
 function App() {
@@ -85,13 +84,13 @@ function App() {
         value={searchValue}
         onChange={onChange}
         placeholder="Search"
-        className="m-auto w-[350px] h-[58px] rounded-[20px] text-3xl border-none"
+        className="m-auto absolute z-10 left-[10%] w-[350px] h-[58px] outline-none rounded-[20px] text-3xl border-none"
         type="search"
       />
       {filteredData?.map((el) => (
         <div
           onClick={() => clickedTarget(el)}
-          className="text-black relative w-[400px] h-[80px] bg-white/95 left-[82%] top-[10%]"
+          className="text-black relative z-20 left-[10%] w-[400px] h-[80px] bg-white/95"
           key={el}
         >
           {el}

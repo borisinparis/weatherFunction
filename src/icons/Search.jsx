@@ -1,5 +1,5 @@
 import * as React from "react"
-const Pin = (props) => (
+const Search = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={33}
@@ -25,4 +25,4 @@ const Pin = (props) => (
     />
   </svg>
 )
-export default Pin
+export default Search
